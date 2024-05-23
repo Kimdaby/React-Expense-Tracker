@@ -12,18 +12,20 @@ const ExpenseList = ({ items, deleteItem }) => {
         <table className="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Description</th>
+              <th scope="col">Date</th>
               <th scope="col">Amount</th>
               <th scope="col">Category</th>
+              <th scope="col">Description</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
-                <td>{item.description}</td>
+                <td>{item.date}</td>
                 <td>${item.amount}</td>
                 <td>{item.category}</td>
+                <td>{item.description}</td>
                 <td>
                   <button
                     className="btn btn-danger"
