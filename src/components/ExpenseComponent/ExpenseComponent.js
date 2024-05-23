@@ -1,12 +1,47 @@
-import { useState } from "react";
+import React from "react";
 
-export const Example = ({ count, onIncrement }) => {
-  const [localCount, setLocalCount] = useState(count || 0);
+const ExpenseList = ({ items, deleteItem }) => {
+  const totalAmount = items.reduce((total, item) => total + item.amount, 0);
+
   return (
-    <>
-      <>
-        <button onClick={onIncrement}>Click to increase</button>
-      </>
-    </>
+    <div className="inputContainer container pt-5">
+      <div className="form-control shadow-lg p-3 mb-5 bg-body rounded gap-3 d-grid">
+        <h2 className="d-flex justify-content-center fw-bolder">
+          Expense History
+        </h2>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Description</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Category</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.description}</td>
+                <td>${item.amount}</td>
+                <td>{item.category}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => deleteItem(item.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="mt-3">
+          <h3>Total: ${totalAmount.toFixed(2)}</h3>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default ExpenseList;
